@@ -1,7 +1,7 @@
 # Temporal Convolutional Networks (TCN) for Human Motion Prediction
 Our work proposes the use of *1D Dilated-Causal* convolutions for motion prediction. Our implementation uses `torch == 1.8.1+cu111`. We contribute two architectures,
-- Temporal Convolutional Networks ( [TCN](./TCN/) ) 
-- Generative Adversarial Networks with TCN ( [TCN-GAN](./TCGAN/) )
+- Temporal Convolutional Networks ( [TCN](./models/TCN/) ) 
+- Generative Adversarial Networks with TCN ( [TCN-GAN](./models/TCGAN/) )
 
 ## Installation and Setup
 Install the fairmotion library from PyPI and setup the local system by installing the necessary libraries from `pip` or `conda`. 
