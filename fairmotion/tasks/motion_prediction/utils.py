@@ -14,6 +14,9 @@ from fairmotion.models import (
     rnn,
     seq2seq,
     transformer,
+    st_transformer,
+    css,
+    css_ablation
 )
 from fairmotion.tasks.motion_prediction import dataset as motion_dataset
 from fairmotion.utils import constants
@@ -138,11 +141,27 @@ def prepare_model(
         model = transformer.TransformerModel(
             input_dim, hidden_dim, 4, hidden_dim, num_layers,
         )
+    elif architecture == "st_transformer":
+        model = st_transformer.STTransformer(
+            input_dim, hidden_dim,1,0.1,1,device=device
+        )
+    elif architecture == "conv_seq2seq":
+        model = css.convSeq2Seq(
+            input_dim, hidden_dim
+        ).to(device=device)
+    elif architecture == "css_ablation":
+        model = css_ablation.convSeq2Seq_ablation(
+            input_dim, hidden_dim
+        ).to(device=device)
+    
     model = model.to(device)
     model.zero_grad()
     model.double()
+    count_parameters(model)
     return model
 
+def count_parameters(model):
+        print("Number of params in model:", sum(p.numel() for p in model.parameters() if p.requires_grad))
 
 def log_config(path, args):
     with open(os.path.join(path, "config.txt"), "w") as f:
@@ -168,3 +187,4 @@ def prepare_tgt_seqs(architecture, src_seqs, tgt_seqs):
         return torch.cat((src_seqs[:, 1:], tgt_seqs), axis=1)
     else:
         return tgt_seqs
+
