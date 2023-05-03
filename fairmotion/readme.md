@@ -4,7 +4,7 @@
 
 
 
-Our work proposes the use of *1D Dilated-Causal* convolutions for motion prediction. Our implementation uses `torch == 1.8.1+cu111`. We contribute two architectures,
+Our work proposes the use of *1D Dilated-Causal* convolutions for motion prediction. Our implementation uses `torch == 1.8.1+cu111` and we contribute two architectures,
 - Temporal Convolutional Networks ( [TCN](./models/) ) 
 - Generative Adversarial Networks with TCN ( [TCN-GAN](./models/) )
 
