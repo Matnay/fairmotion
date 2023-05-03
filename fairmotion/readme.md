@@ -35,9 +35,9 @@ Our proposed TCN is inspired from [this work](https://www.sciencedirect.com/scie
 
 Once the setup is complete execute this command to run TCN.
 
-`python fairmotion/tasks/motion_prediction/training.py \ <br>
-    --save-model-path <PATH TO SAVE MODELS> \ <br>
-    --preprocessed-path <PREPROCESSED DATA PATH> \ <br>
+`python fairmotion/tasks/motion_prediction/training.py  
+    --save-model-path <PATH TO SAVE MODELS> 
+    --preprocessed-path <PREPROCESSED DATA PATH> 
     --architecture tcn --attention 0 --epochs 100`
 
 <br>
@@ -52,9 +52,9 @@ We also studied the performance of Generative Adversarial Networks to generate a
 
 Once the setup is complete execute this command to run TCN-GAN.
 
-`python fairmotion/tasks/motion_prediction/training.py \
-    --save-model-path <PATH TO SAVE MODELS> \ <br>
-    --preprocessed-path <PREPROCESSED DATA PATH> \ <br>
+`python fairmotion/tasks/motion_prediction/training.py 
+    --save-model-path <PATH TO SAVE MODELS> 
+    --preprocessed-path <PREPROCESSED DATA PATH> 
     --architecture tcn_gan --attention 0 --epochs 100
     `
 
