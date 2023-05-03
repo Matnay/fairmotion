@@ -35,12 +35,10 @@ Our proposed TCN is inspired from [this work](https://www.sciencedirect.com/scie
 
 Once the setup is complete execute this command to run TCN.
 
-`python fairmotion/tasks/motion_prediction/training.py \
-    --save-model-path <PATH TO SAVE MODELS> \
-    --preprocessed-path <PREPROCESSED DATA PATH> \
-    --architecture tcn
-    --attention 0
-    --epochs 100`
+`python fairmotion/tasks/motion_prediction/training.py \ <br>
+    --save-model-path <PATH TO SAVE MODELS> \ <br>
+    --preprocessed-path <PREPROCESSED DATA PATH> \ <br>
+    --architecture tcn --attention 0 --epochs 100`
 
 <br>
 
@@ -55,11 +53,9 @@ We also studied the performance of Generative Adversarial Networks to generate a
 Once the setup is complete execute this command to run TCN-GAN.
 
 `python fairmotion/tasks/motion_prediction/training.py \
-    --save-model-path <PATH TO SAVE MODELS> \
-    --preprocessed-path <PREPROCESSED DATA PATH> \
-    --architecture tcn_gan
-    --attention 0
-    --epochs 100
+    --save-model-path <PATH TO SAVE MODELS> \ <br>
+    --preprocessed-path <PREPROCESSED DATA PATH> \ <br>
+    --architecture tcn_gan --attention 0 --epochs 100
     `
 
 We have added an additional [gradient penalty](https://arxiv.org/abs/1704.00028) loss function for the discriminator to improve the stability of training and to enforce the $\rho$ - Lipschitz constraint. You can use that by setting `--gp-loss` flag to 1 in the above command. In addition to that, to reduce the number of discriminator updates, we have added the `--n-crit-iterations` which is 1 by default. 
