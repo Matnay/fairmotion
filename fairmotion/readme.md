@@ -25,8 +25,8 @@ In our study, we used the [AMASS ACCAD](https://amass.is.tue.mpg.de/)    dataset
 
 Our proposed TCN is inspired from [this work](https://www.sciencedirect.com/science/article/abs/pii/S0020025520308896) and hence follows a similar architecture with slight modifications in the network layers. For the motion prediction task, we feed an input sequence consisting of `120` time frames and predict `24` time frames in the future. The proposed architecture is shown below, 
 
-<!-- ![TCN](./imgs/tcn.png) -->
-<img src="./imgs/tcn.png"  width="500" height="500">    
+![TCN](./imgs/tcn.png)
+  
 
 Once the setup is complete execute this command to run TCN.
 
@@ -44,8 +44,8 @@ Once the setup is complete execute this command to run TCN.
 We also studied the performance of Generative Adversarial Networks to generate a set of distinct and kinematically valid future poses given an input pose conditioned on a latent embedding $Z ∼ N (0, 1)$. Since the TCN outperforms all the other networks that we researched, it forms the generator of the GAN. The discriminator follows a similar structure [this work](https://www.sciencedirect.com/science/article/abs/pii/S0020025520308896) except for the final output layer where we use a ReLU activation instead of Sigmoid. We study the performance of TCN-GAN with only the *Consistency Generator* and we have not used the *Fidelity Discriminator* in tandem. We modified the architectures and loss functions in order to improve the performance and stabilize the training of our GAN with only one discriminator. The architecture is shown below,
 
 
-<img src="./imgs/tcgan.png"  width="500" height="500">    
-<!-- ![TCN-GAN](./imgs/tcgan.png) -->
+
+![TCN-GAN](./imgs/tcgan.png)
 
 Once the setup is complete execute this command to run TCN-GAN.
 
@@ -71,14 +71,13 @@ The **test MAE's** for the TCN-GAN model is tabulated below. We can see 3 possib
 
 The final predictions for the networks are as follows,
 #### 1. TCN 
-<!-- ![TCN](./imgs/TCN_A_m.png) -->
-<img src="./imgs/TCN_A_m.png"  width="500" height="500">    
+![TCN](./imgs/TCN_A_m.png)
+
 
 <br>
 #### 2. TCN-GAN
 
-<!-- ![TCN-GAN](./imgs/TCNGAN_m.png) -->
-<img src="./imgs/TCNGAN_m"  width="500" height="500">
+![TCN-GAN](./imgs/TCNGAN_m.png)
 <br>
 
 The weights of the TCN architecture with and without attention are visualised below. <br>
