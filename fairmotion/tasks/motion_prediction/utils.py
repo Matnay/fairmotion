@@ -14,6 +14,9 @@ from fairmotion.models import (
     rnn,
     seq2seq,
     transformer,
+    tcn,
+    tcn_discrim,
+    tcn_gen
 )
 from fairmotion.tasks.motion_prediction import dataset as motion_dataset
 from fairmotion.utils import constants
@@ -113,7 +116,7 @@ def prepare_dataset(
 
 
 def prepare_model(
-    input_dim, hidden_dim, device, num_layers=1, architecture="seq2seq"
+    input_dim, hidden_dim, device, num_layers=1, architecture="seq2seq",kernel_size = 3,dis_dims = 144,attention = False,att_heads = 1,z_dims = 128
 ):
     if architecture == "rnn":
         model = rnn.RNN(input_dim, hidden_dim, num_layers)
@@ -138,6 +141,26 @@ def prepare_model(
         model = transformer.TransformerModel(
             input_dim, hidden_dim, 4, hidden_dim, num_layers,
         )
+
+    elif architecture == "tcn":
+        model = tcn.TCN(
+            input_dim,hidden_dim,kernel_size,n_blocks = num_layers
+            )
+    elif architecture == "tcn_gan":
+        gen_model = tcn_gen.TCNGenerator(
+            input_dim,hidden_dim,kernel_size,n_blocks = num_layers,attention = attention,attention_heads= att_heads,z_dims = z_dims
+            )
+        dis_model = tcn_discrim.TCNDiscriminator(input_dim,dis_dims,kernel_size)
+
+        gen_model = gen_model.to(device)
+        gen_model.zero_grad()
+        gen_model.double()
+
+        dis_model = dis_model.to(device)
+        dis_model.zero_grad()
+        dis_model.double()
+        return (gen_model,dis_model)
+        
     model = model.to(device)
     model.zero_grad()
     model.double()
@@ -168,3 +191,7 @@ def prepare_tgt_seqs(architecture, src_seqs, tgt_seqs):
         return torch.cat((src_seqs[:, 1:], tgt_seqs), axis=1)
     else:
         return tgt_seqs
+
+def create_dir_if_absent(path):
+    if not os.path.exists(path):
+        os.makedirs(path)

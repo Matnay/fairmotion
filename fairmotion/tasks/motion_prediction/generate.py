@@ -3,7 +3,7 @@
 import torch
 
 
-def eval(model, criterion, dataset, batch_size, device):
+def eval(model, criterion, dataset, batch_size, device,type=None):
     """
     Evaluate the performance of the model on the provided dataset.
     Returns average loss over the dataset.
@@ -19,19 +19,26 @@ def eval(model, criterion, dataset, batch_size, device):
                 tgt_seqs.to(device),
                 seed_tgt_seqs.to(device),
             )
-            outputs = model(
-                src_seqs,
-                seed_tgt_seqs,
-                max_len=max_len,
-                teacher_forcing_ratio=0,
-            )
+            if type == "tcn_gan":
+                latent_z = torch.randn((src_seqs.shape[0],216,128)).double().to(device)
+                outputs = model(src_seqs.transpose(2,1),latent_z)
+            elif type == "tcn":
+                outputs = model(src_seqs)
+            else:
+
+                outputs = model(
+                    src_seqs,
+                    seed_tgt_seqs,
+                    max_len=max_len,
+                    teacher_forcing_ratio=0,
+                )
             outputs = outputs.double()
             loss = criterion(outputs, tgt_seqs)
             eval_loss += loss.item()
         return eval_loss / ((iterations + 1) * batch_size)
 
 
-def generate(model, src_seqs, max_len, device):
+def generate(model, src_seqs, max_len, device,type=None):
     """
     Generates output sequences for given input sequences by running forward
     pass through the given model
@@ -40,7 +47,13 @@ def generate(model, src_seqs, max_len, device):
     with torch.no_grad():
         tgt_seqs = src_seqs[:, -1].unsqueeze(1)
         src_seqs, tgt_seqs = src_seqs.to(device), tgt_seqs.to(device)
-        outputs = model(
-            src_seqs, tgt_seqs, max_len=max_len, teacher_forcing_ratio=0
-        )
+        if type == "tcn gan":
+            latent_z = torch.randn((src_seqs.shape[0],216,128)).double().to(device)
+            outputs = model(src_seqs.transpose(2,1),latent_z)
+            outputs = model(src_seqs,latent_z)
+        elif type == "tcn":outputs = model(src_seqs)
+        else:
+            outputs = model(
+                src_seqs, tgt_seqs, max_len=max_len, teacher_forcing_ratio=0
+            )
         return outputs.double()
