@@ -75,10 +75,10 @@ The **test MAE's** for the TCN-GAN model is tabulated below. We can see 3 possib
 
 
 The final predictions for the networks are as follows,
-#### 1. TCN 
+#### 1.TCN 
 ![TCN](./imgs/TCN_A_m.png)
-<br>
-#### 2. TCN-GAN
+
+#### 2.TCN-GAN
 
 ![TCN-GAN](./imgs/TCNGAN_m.png)
 <br>
