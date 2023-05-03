@@ -14,7 +14,7 @@ To build it from source, clone this repository and build the project.
 `$ cd fairmotion` <br>
 `$ pip install -e .`
 
-For real time logging of the metrics including training losses of generator and discriminator, validation losses and Mean Angle Errors (MAE), you can set the `--wandb` flag to 1. To install `wandb`, run `pip install wandb` command and update your project name and session info in the [training script](./training.py)
+For real time logging of the metrics including training losses of generator and discriminator, validation losses and Mean Angle Errors (MAE), you can set the `--wandb` flag to 1. To install `wandb`, run `pip install wandb` command and update your project name and session info in the [training script](./tasks/motion_prediction/training.py)
 
 
 ## Dataset
