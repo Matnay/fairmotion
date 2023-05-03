@@ -15,7 +15,7 @@ Install the fairmotion library from PyPI and setup the local system by installin
 
 To build it from source, clone this repository and build the project.
 
-`$ git clone https://github.com/` <br>
+`$ git clone https://github.com/facebookresearch/fairmotion.git` <br>
 `$ cd fairmotion` <br>
 `$ pip install -e .`
 
