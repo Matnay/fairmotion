@@ -64,7 +64,7 @@ The **test MAE's** for the TCN-GAN model is tabulated below. We can see 3 possib
 |@12 | 6.240 | 6.266 | 6.233|
 |@18 | 11.927| 11.930 | 11.900 |
 |@24 | 18.155 | 18.130 | 18.162 |
-|
+
 
 The final predictions for the networks are as follows:
 
