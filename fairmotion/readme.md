@@ -42,7 +42,9 @@ Once the setup is complete execute this command to run TCN.
 ### 2. TCN-GAN
 We also studied the performance of Generative Adversarial Networks to generate a set of distinct and kinematically valid future poses given an input pose conditioned on a latent embedding $Z ∼ N (0, 1)$. Since the TCN outperforms all the other networks that we researched, it forms the generator of the GAN. The discriminator follows a similar structure [this work](https://www.sciencedirect.com/science/article/abs/pii/S0020025520308896) except for the final output layer where we use a ReLU activation instead of Sigmoid. We study the performance of TCN-GAN with only the *Consistency Generator* and we have not used the *Fidelity Discriminator* in tandem. We modified the architectures and loss functions in order to improve the performance and stabilize the training of our GAN with only one discriminator. The architecture is shown below,
 
-![TCN-GAN](./imgs/tcgan.png)
+
+<img src="./imgs/tcgan.png"  width="300" height="300">    
+<!-- ![TCN-GAN](./imgs/tcgan.png) -->
 
 Once the setup is complete execute this command to run TCN-GAN.
 
