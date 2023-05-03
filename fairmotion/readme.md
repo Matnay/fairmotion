@@ -18,7 +18,7 @@ For real time logging of the metrics including training losses of generator and 
 
 
 ## Dataset
-In our study, we used the [AMASS ACCAD](https://amass.is.tue.mpg.de/)    dataset. Follow this link to download the dataset from our [drive](https://gtvault-my.sharepoint.com/:u:/g/personal/skumar671_gatech_edu/EQa0xTdWhRJIpcRrtqf_BXwBZ7eLeomV5zX1uXBxdDLi4Q?e=r5Yfj2) and the Motion Prediction section for dataset placement and directory structure.
+In our study, we used the [AMASS ACCAD](https://amass.is.tue.mpg.de/)    dataset. Follow this link to download the dataset from our [drive](https://gtvault-my.sharepoint.com/:u:/g/personal/skumar671_gatech_edu/EQa0xTdWhRJIpcRrtqf_BXwBZ7eLeomV5zX1uXBxdDLi4Q?e=r5Yfj2) and the [Motion Prediction section](./tasks/motion_prediction) for dataset placement and directory structure.
 
 ## Usage
 ### 1. TCN 
