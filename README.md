@@ -30,6 +30,9 @@ from fairmotion.data import bvh
 BVH_FILENAME = “PATH_TO_BVH_FILE”
 motion = bvh.load(BVH_FILENAME)
 ```
+### Additional Models
+Too execute our proposed models (TCN & TCN-GAN), please go to this [section](./fairmotion/) 
+
 
 If you recieve errors like the ones below, you can find the workaround [here](https://stackoverflow.com/questions/65202395/pyopengl-on-macos-bigsur-and-opengl-error-nullfunctionerror#:~:text=if%20name%20%3D%3D%20%27OpenGL%27%3A%0A%20%20%20%20fullName%20%3D%20%27/System/Library/Frameworks/OpenGL.framework/OpenGL%27%0Aelif%20name%20%3D%3D%20%27GLUT%27%3A%0A%20%20%20%20fullName%20%3D%20%27/System/Library/Frameworks/GLUT.framework/GLUT%27).
 ```
