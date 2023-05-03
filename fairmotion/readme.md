@@ -66,21 +66,14 @@ The **test MAE's** for the TCN-GAN model is tabulated below. We can see 3 possib
 |@24 | 18.155 | 18.130 | 18.162 |
 
 
-The final predictions for the networks are as follows:
+The final predictions for the networks are as follows,
+1. TCN 
+[TCN](./imgs/TCN_A_m.png)
+<br>
+2. TCN-GAN
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+[TCN-GAN](./imgs/TCNGAN_m.png)
+<br>
 
 The weights of the TCN architecture with and without attention are visualised below. <br>
 
