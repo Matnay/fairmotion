@@ -233,6 +233,8 @@ if __name__ == "__main__":
             "st_transformer",
             "conv_seq2seq",
             "css_ablation"
+            "tcn",    ## Newly Added
+            "tcn_gan" ## Newly Added
         ],
     )
     parser.add_argument(

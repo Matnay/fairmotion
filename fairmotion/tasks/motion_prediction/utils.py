@@ -16,7 +16,11 @@ from fairmotion.models import (
     transformer,
     st_transformer,
     css,
-    css_ablation
+    css_ablation,
+    tcn,
+    tcn_discrim,
+    tcn_gen
+
 )
 from fairmotion.tasks.motion_prediction import dataset as motion_dataset
 from fairmotion.utils import constants
@@ -116,7 +120,7 @@ def prepare_dataset(
 
 
 def prepare_model(
-    input_dim, hidden_dim, device, num_layers=1, architecture="seq2seq"
+    input_dim, hidden_dim, device, num_layers=1, architecture="seq2seq", kernel_size=3, z_dims=128, dis_dims=144, attention=False, att_heads=1
 ):
     if architecture == "rnn":
         model = rnn.RNN(input_dim, hidden_dim, num_layers)
@@ -132,7 +136,8 @@ def prepare_model(
         ).to(device)
         model = seq2seq.Seq2Seq(enc, dec)
     elif architecture == "tied_seq2seq":
-        model = seq2seq.TiedSeq2Seq(input_dim, hidden_dim, num_layers, device)
+        model = seq2seq.TiedSeq2Seq(
+            input_dim, hidden_dim, num_layers, device)
     elif architecture == "transformer_encoder":
         model = transformer.TransformerLSTMModel(
             input_dim, hidden_dim, 4, hidden_dim, num_layers,
@@ -143,7 +148,7 @@ def prepare_model(
         )
     elif architecture == "st_transformer":
         model = st_transformer.STTransformer(
-            input_dim, hidden_dim,1,0.1,1,device=device
+            input_dim, hidden_dim, 1, 0.1, 1, device=device
         )
     elif architecture == "conv_seq2seq":
         model = css.convSeq2Seq(
@@ -153,15 +158,37 @@ def prepare_model(
         model = css_ablation.convSeq2Seq_ablation(
             input_dim, hidden_dim
         ).to(device=device)
-    
+    elif architecture == "tcn":
+        model = tcn.TCN(
+            input_dim, hidden_dim, kernel_size, n_blocks=num_layers
+        )
+    elif architecture == "tcn_gan":
+        gen_model = tcn_gen.TCNGenerator(
+            input_dim, hidden_dim, kernel_size, n_blocks=num_layers, attention=attention, attention_heads=att_heads, z_dims=z_dims
+        )
+        dis_model = tcn_discrim.TCNDiscriminator(
+            input_dim, dis_dims, kernel_size)
+
+        gen_model = gen_model.to(device)
+        gen_model.zero_grad()
+        gen_model.double()
+
+        dis_model = dis_model.to(device)
+        dis_model.zero_grad()
+        dis_model.double()
+        return (gen_model, dis_model)
+
     model = model.to(device)
     model.zero_grad()
     model.double()
     count_parameters(model)
     return model
 
+
 def count_parameters(model):
-        print("Number of params in model:", sum(p.numel() for p in model.parameters() if p.requires_grad))
+    print("Number of params in model:", sum(p.numel()
+          for p in model.parameters() if p.requires_grad))
+
 
 def log_config(path, args):
     with open(os.path.join(path, "config.txt"), "w") as f:
@@ -187,4 +214,3 @@ def prepare_tgt_seqs(architecture, src_seqs, tgt_seqs):
         return torch.cat((src_seqs[:, 1:], tgt_seqs), axis=1)
     else:
         return tgt_seqs
-
